@@ -4,6 +4,12 @@ this is fork from : https://github.com/arunoda/meteor-up/tree/mupx
 
 add *version control* function
 
+# Install
+
+npm install -g mup-version
+
+# Command
+
 deploy:
 
 `mup deploy 0.0.1`
