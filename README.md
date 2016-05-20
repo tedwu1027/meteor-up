@@ -6,7 +6,7 @@ add *version control* function
 
 # Install
 
-npm install -g mup-version
+`npm install -g mup-version`
 
 # Command
 
