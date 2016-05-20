@@ -71,6 +71,10 @@ revert_app (){
   fi
 }
 
+deployment_failed (){
+  echo "App did not pick up! Please check app logs." 1>&2
+  exit 1
+}
 
 # logic
 set -e
@@ -110,21 +114,18 @@ fi
 
 cd /opt/<%= appName %>/
 
-# remove old app, if it exists
-if [ -d old_app ]; then
-  sudo rm -rf old_app
-fi
+# move latest bundle to tags/${version}
+sudo mv tmp/bundle tags/<%= version %>
 
-## backup current version
-if [[ -d app ]]; then
-  sudo mv app old_app
-fi
+# delete old softlink
+sudo rm -rf app
 
-sudo mv tmp/bundle app
+# create new softlink
+sudo ln -s tags/<%= version %> app
 
 #wait and check
 echo "Waiting for MongoDB to initialize. (5 minutes)"
-. /opt/<%= appName %>/config/env.sh
+. /opt/<%= appName %>/tags/<%= version %>/config/env.sh
 wait-for-mongo ${MONGO_URL} 300000
 
 # restart app
@@ -135,7 +136,7 @@ echo "Waiting for <%= deployCheckWaitTime %> seconds while app is booting up"
 sleep <%= deployCheckWaitTime %>
 
 echo "Checking is app booted or not?"
-curl localhost:${PORT} || revert_app
+curl localhost:${PORT} || deployment_failed
 
 # chown to support dumping heapdump and etc
 sudo chown -R meteoruser app
