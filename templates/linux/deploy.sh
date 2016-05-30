@@ -121,7 +121,7 @@ sudo mv tmp/bundle tags/<%= version %>
 sudo rm -rf app
 
 # create new softlink
-sudo ln -s tags/<%= version %> app
+sudo ln -s tags/<%= version %>/bundle app
 
 #wait and check
 echo "Waiting for MongoDB to initialize. (5 minutes)"

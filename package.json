@@ -1,6 +1,6 @@
 {
   "name": "mup-version",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "Production Quality Meteor Deployments",
   "dependencies": {
     "async": "^0.9.0",
@@ -13,7 +13,7 @@
     "archiver": "0.14.x"
   },
   "bin": {
-    "mup": "./bin/mup"
+    "mupv": "./bin/mup"
   },
   "author": "Ted Wu <tedwu1027@gmail.com>",
   "repository": {
