@@ -11,9 +11,11 @@ cd /opt/<%= appName %>/
 
 # delete old softlink
 sudo rm -rf app
+sudo rm -rf config
 
 # create new softlink
-sudo ln -s tags/<%= version %> app
+sudo ln -s tags/<%= version %>/bundle app
+sudo ln -s tags/<%= version %>/config config
 
 #wait and check
 echo "Waiting for MongoDB to initialize. (5 minutes)"
